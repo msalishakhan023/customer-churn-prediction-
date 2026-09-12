@@ -1,7 +1,6 @@
 # Customer Churn Prediction
 
 ## Week 1: Exploratory Data Analysis
-
 ### Dataset
 - Source: Telco Customer Churn (Kaggle)
 - Size: 7,043 customers, 21 features
