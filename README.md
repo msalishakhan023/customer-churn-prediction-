@@ -198,3 +198,55 @@ This project focuses on predicting customer churn using Logistic Regression, Dec
 * The tree automatically discovers critical business rules: **Short tenure + Fiber Optic internet + Month-to-month contracts** present the highest churn risk, while **Long tenure + Two-year contracts** practically guarantee customer retention.
 
 
+
+
+# 📊 Week 3: Model Optimization, Unsupervised Learning & Segmentation
+
+This repository contains the Week 3 deliverables for the Customer Churn Analytics project, focusing on cross-validation, hyperparameter tuning, dimensionality reduction (PCA), and customer segmentation (K-Means).
+
+---
+
+## 📌 Executive Summary
+- **Best Model:** `XGBoost (tuned)` with a **Test AUC of 0.8478**.
+- **Dimensionality Reduction:** **15 out of 30 PCA components** capture **90%** of the total variance.
+- **Customer Segmentation:** Identified **4 distinct clusters**, including a high-risk group with a **43% churn rate**.
+
+---
+
+## 🛠️ Key Tasks & Findings
+
+### 1. Model Optimization & Cross-Validation
+Evaluated models using 5-fold Cross-Validation to eliminate single-split random variance:
+
+| Model | CV Mean AUC | CV Std |
+| :--- | :---: | :---: |
+| **Logistic Regression (tuned C)** | 0.8464 | 0.0129 |
+| **Random Forest (random search)** | 0.8464 | 0.0114 |
+| **XGBoost (tuned)** | **0.8504** | **0.0125** |
+
+- **Test AUC Evaluation:** The final XGBoost model achieved a test AUC of **0.8478**, falling safely within the 2-std confidence interval `[0.8254, 0.8754]`.
+- **Hyperparameter Tuning:** Random Search was ~3x faster than exhaustive Grid Search while achieving comparable metrics.
+
+---
+
+### 2. Dimensionality Reduction (PCA)
+- **Variance Analysis:** The first principal component (PC1) accounts for ~33% of dataset variance.
+- **Feature Redundancy:** **15 of 30 components** preserve **90% of total variance**, showing significant feature redundancy due to dummy indicators like `InternetService_No`.
+
+---
+
+### 3. Customer Segmentation (K-Means)
+Using **K-Means clustering ($k = 4$)**, customers were grouped into 4 distinct profiles:
+
+1. **At-Risk Mid-Tenure Big Spenders (43% Churn):** High monthly charges, mid-tenure, high cancellation risk.
+2. **New Budget Users (32% Churn):** Short tenure, lower monthly spend.
+3. **Loyal High-Value Power Users (14% Churn):** Long tenure, multi-service subscribers.
+4. **Long-Term Low-Touch Users (5% Churn):** Low monthly charges, minimal service add-ons.
+
+---
+
+## 💡 Biggest Lesson
+> *"High single-split accuracy can be misleading due to random variance, making cross-validation essential for true model evaluation and reliable decision-making."*
+
+```
+
